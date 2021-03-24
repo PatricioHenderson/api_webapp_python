@@ -73,3 +73,16 @@ def report(limit=0, offset=0):
         json_result_list.append(json_result)
 
     return json_result_list
+
+def age_report(limit=0 , offset=0):
+    query = db.session.query(Persona)
+    if limit > 0:
+        query = query.limit(limit)
+        if offset > 0:
+            query = query.offset(offset)
+    
+    ids = [x.name for x in query]
+    age = [x.age for x in query]
+
+    return ids,age
+
